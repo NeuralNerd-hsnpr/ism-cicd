@@ -32,5 +32,5 @@ jobs:
       run: |
         # Build the unified image to ensure Dockerfile is valid
         # We tag it as 'ci-test' and remove it immediately after to save space
-        docker build -t unified-ai-service:ci-test .
-        docker rmi unified-ai-service:ci-test
+        sudo docker build -t unified-ai-service:ci-test .
+        sudo docker rmi unified-ai-service:ci-test
