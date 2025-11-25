@@ -27,7 +27,7 @@ jobs:
         run: |
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           # Build the image and tag it. We do NOT remove it here so deploy can use it.
-          docker build -t unified-ai-service:$SHORT_SHA .
+          sudo docker build -t unified-ai-service:$SHORT_SHA .
 
   # CD Job: Runs only on push to develop, AND only if CI passes
   deploy:
@@ -41,12 +41,12 @@ jobs:
           echo "Deploying image: unified-ai-service:$SHORT_SHA"
 
           # Stop and Remove Existing Container
-          docker stop ai-service || true
-          docker rm ai-service || true
+          sudo docker stop ai-service || true
+          sudo docker rm ai-service || true
 
           # Run New Container
           # Uses the image built in the 'ci' job (persisted on the self-hosted runner)
-          docker run -d \
+          sudo docker run -d \
             --name ai-service \
             --net host \
             --gpus all \
@@ -56,4 +56,4 @@ jobs:
             unified-ai-service:$SHORT_SHA
 
           # Prune unused images to save space
-          docker image prune -f
+          sudo docker image prune -f
