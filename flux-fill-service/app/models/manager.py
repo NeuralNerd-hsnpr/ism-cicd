@@ -22,7 +22,11 @@ class ModelManager:
         """
         print("MODEL_MANAGER: Loading environment variables and logging into Hugging Face...")
         load_dotenv()
-        login(token=os.getenv("HUGGING_FACE_API_TOKEN"))
+        my_token = os.getenv("HUGGING_FACE_API_TOKEN")
+        print("#"*10)
+        print(my_token)
+        print("#"*10)
+        login(token=my_token)
 
         print("MODEL_MANAGER: Loading Nunchaku Flux Transformer...")
         transformer = NunchakuFluxTransformer2dModel.from_pretrained("mit-han-lab/svdq-int4-flux.1-fill-dev")
