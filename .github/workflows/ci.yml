@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
- 
+
 jobs:
   lint:
     runs-on: self-hosted
@@ -24,14 +24,13 @@ jobs:
         # Run ruff on all directories, ignore some common errors for now to avoid breaking everything immediately
         ruff check . --select E,F,W --ignore E501
 
-  build-verification:
+  build-unified-check:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        service: [main-app, flux-fill-service, lama-service, rmbg-service, gaze-service, stable-diffusion-pix2pix-service, sdxl-inpainting-service, wan-service]
     steps:
     - uses: actions/checkout@v4
-    - name: Build Docker Image for ${{ matrix.service }}
+    - name: Verify Unified Docker Build
       run: |
-        SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-        docker build -t ${{ matrix.service }}:$SHORT_SHA ./${{ matrix.service }}
+        # Build the unified image to ensure Dockerfile is valid
+        # We tag it as 'ci-test' and remove it immediately after to save space
+        docker build -t unified-ai-service:ci-test .
+        docker rmi unified-ai-service:ci-test
