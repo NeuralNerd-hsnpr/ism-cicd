@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 # Load environment variables from a .env file
 load_dotenv()
 
+
 class Settings:
     # --- Project Directory Setup ---
     # BASE_DIR will be the absolute path to your project's root folder.
