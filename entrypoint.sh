@@ -42,16 +42,16 @@ cd /app/sdxl-inpainting-service
 uvicorn app.main:app --host 0.0.0.0 --port 8006 > /app/logs/sdxl.log 2>&1 &
 
 # 7. Start Wan Service (Port 8007)
-echo "Starting Wan Service (8007)..."
-cd /app/wan-service
-uvicorn app.main:app --host 0.0.0.0 --port 8007 > /app/logs/wan.log 2>&1 &
+# echo "Starting Wan Service (8007)..."
+# cd /app/wan-service
+# uvicorn app.main:app --host 0.0.0.0 --port 8007 > /app/logs/wan.log 2>&1 &
 
 # 8. Start Celery Workers
 echo "Starting Celery Workers..."
 cd /app/main_app
 celery -A tasks.celery_app worker -Q inpainting_sync,inpainting_async,treatment_sync,treatment_async --loglevel=info -n worker_inpainting@%h > /app/logs/worker_inpainting.log 2>&1 &
 celery -A tasks.celery_app worker -Q background_sync,background_async --loglevel=info -n worker_background@%h > /app/logs/worker_background.log 2>&1 &
-celery -A tasks.celery_app worker -Q video_async --loglevel=info -n worker_video@%h > /app/logs/worker_video.log 2>&1 &
+# celery -A tasks.celery_app worker -Q video_async --loglevel=info -n worker_video@%h > /app/logs/worker_video.log 2>&1 &
 
 # 9. Start Main App (Port 8000)
 echo "Starting Main App (8000)..."

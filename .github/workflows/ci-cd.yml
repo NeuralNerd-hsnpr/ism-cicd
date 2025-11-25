@@ -1,0 +1,59 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # CI Job: Runs on every push/PR to develop
+  ci:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff
+      - name: Lint with Ruff
+        run: |
+          ruff check . --select E,F,W --ignore E501
+      - name: Build Docker Image
+        run: |
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          # Build the image and tag it. We do NOT remove it here so deploy can use it.
+          docker build -t unified-ai-service:$SHORT_SHA .
+
+  # CD Job: Runs only on push to develop, AND only if CI passes
+  deploy:
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: self-hosted
+    steps:
+      - name: Deploy
+        run: |
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          echo "Deploying image: unified-ai-service:$SHORT_SHA"
+
+          # Stop and Remove Existing Container
+          docker stop ai-service || true
+          docker rm ai-service || true
+
+          # Run New Container
+          # Uses the image built in the 'ci' job (persisted on the self-hosted runner)
+          docker run -d \
+            --name ai-service \
+            --net host \
+            --gpus all \
+            --restart always \
+            -v ~/.cache/huggingface:/root/.cache/huggingface \
+            -v $(pwd)/logs:/app/logs \
+            unified-ai-service:$SHORT_SHA
+
+          # Prune unused images to save space
+          docker image prune -f
