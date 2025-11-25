@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Core AI libraries
+torch
+torchvision
+torchaudio
+
+# The model's main dependency
+transformers

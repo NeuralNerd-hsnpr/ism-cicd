@@ -1,0 +1,25 @@
+# Configuration for dynamic scaling of services
+# Modify these values to change the number of replicas for each service.
+# Run 'python scripts/generate_compose_override.py' after changing this file.
+
+services:
+  flux-service:
+    replicas: 1
+  lama-service:
+    replicas: 1
+  rmbg-service:
+    replicas: 1
+  gaze-service:
+    replicas: 1
+  pix2pix-service:
+    replicas: 1
+  sdxl-service:
+    replicas: 1
+  wan-service:
+    replicas: 1
+  celery-worker-inpainting:
+    replicas: 1
+  celery-worker-background:
+    replicas: 1
+  celery-worker-video:
+    replicas: 1

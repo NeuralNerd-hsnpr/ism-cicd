@@ -1,0 +1,26 @@
+INFO:     Will watch for changes in these directories: ['/home/administrator/development/isAIInpaintingServices/sdxl-inpainting-service']
+INFO:     Uvicorn running on http://0.0.0.0:8006 (Press CTRL+C to quit)
+INFO:     Started reloader process [3904148] using WatchFiles
+/home/administrator/miniconda3/envs/inpaint/lib/python3.11/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO:     Started server process [3904157]
+INFO:     Waiting for application startup.
+INFO:     Loading SDXL Inpainting model (diffusers/stable-diffusion-xl-1.0-inpainting-0.1)...
+INFO:     Using device: cuda
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]The config attributes {'decay': 0.9999, 'inv_gamma': 1.0, 'min_decay': 0.0, 'optimization_step': 37000, 'power': 0.6666666666666666, 'update_after_step': 0, 'use_ema_warmup': False} were passed to UNet2DConditionModel, but are not expected and will be ignored. Please verify your config.json configuration file.
+Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:01,  3.21it/s]Loading pipeline components...:  57%|█████▋    | 4/7 [00:00<00:00,  5.69it/s]Loading pipeline components...:  86%|████████▌ | 6/7 [00:01<00:00,  5.81it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:01<00:00,  6.21it/s]
+INFO:     Application startup complete.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     SDXL Inpainting model loaded successfully.
+INFO:     172.167.1.30:45478 - "GET /docs HTTP/1.1" 200 OK
+INFO:     172.167.1.30:45478 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3904157]
+INFO:     Stopping reloader process [3904148]
+/home/administrator/miniconda3/envs/inpaint/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

@@ -1,0 +1,26 @@
+INFO:     Will watch for changes in these directories: ['/home/administrator/development/isAIInpaintingServices/rmbg-service']
+INFO:     Uvicorn running on http://0.0.0.0:8003 (Press CTRL+C to quit)
+INFO:     Started reloader process [3904143] using WatchFiles
+/home/administrator/miniconda3/envs/inpaint/lib/python3.11/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO:     Started server process [3904158]
+INFO:     Waiting for application startup.
+/home/administrator/miniconda3/envs/inpaint/lib/python3.11/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/administrator/miniconda3/envs/inpaint/lib/python3.11/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+INFO:     Application startup complete.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     Loading Background Removal model (briaai/RMBG-2.0)...
+INFO:     Using device: cuda
+INFO:     Background Removal model loaded successfully.
+INFO:     172.167.1.30:46778 - "GET /docs HTTP/1.1" 200 OK
+INFO:     172.167.1.30:46778 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3904158]
+INFO:     Stopping reloader process [3904143]

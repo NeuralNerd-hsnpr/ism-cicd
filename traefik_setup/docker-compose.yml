@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command:
+      # --- Commands to configure Traefik internally ---
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.file.filename=/etc/traefik/dynamic_conf.yml"
+
+      # --- ENTRYPOINT DEFINITIONS ---
+      # Defines an entrypoint named 'web' on port 80 (optional, you can remove this)
+      - "--entrypoints.web.address=:80"
+      # (CHANGE 1) Defines a NEW entrypoint named 'api' on port 8004
+      - "--entrypoints.api.address=:8004"
+
+    ports:
+      # --- Port mapping from Host to Container ---
+      # Maps host port 80 to container port 80 (optional)
+      - "80:80"
+      # Maps host port 8080 to container port 8080 for the dashboard
+      - "8080:8080"
+      # (CHANGE 2) Maps host port 8004 to the NEW 'api' entrypoint on container port 8004
+      - "8004:8004"
+
+    volumes:
+      - ./dynamic_conf.yml:/etc/traefik/dynamic_conf.yml:ro
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"

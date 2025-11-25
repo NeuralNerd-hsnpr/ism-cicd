@@ -1,0 +1,155 @@
+ 
+ -------------- worker_inpainting@regurgedevgpuobjmodify v5.5.3 (immunity)
+--- ***** ----- 
+-- ******* ---- Linux-5.15.0-88-generic-x86_64-with-glibc2.35 2025-11-22 16:49:54
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         worker:0x7fec00703f50
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/0
+- *** --- * --- .> concurrency: 72 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> inpainting_async exchange=celery(direct) key=celery
+                .> inpainting_sync  exchange=celery(direct) key=celery
+                .> treatment_async  exchange=celery(direct) key=celery
+                .> treatment_sync   exchange=celery(direct) key=celery
+
+[tasks]
+  . tasks.background_task.process_background_insertion_request
+  . tasks.background_task.process_background_removal_request
+  . tasks.background_task.process_background_replacement_request
+  . tasks.inpainting_task.process_complex_inpainting_request
+  . tasks.treatment_task.process_complex_treatment_request
+  . tasks.video_task.process_video_generation_request
+
+[2025-11-22 16:50:00,198: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2025-11-22 16:50:00,204: INFO/MainProcess] mingle: searching for neighbors
+[2025-11-22 16:50:01,214: INFO/MainProcess] mingle: all alone
+[2025-11-22 16:50:01,228: INFO/MainProcess] worker_inpainting@regurgedevgpuobjmodify ready.
+[2025-11-22 16:53:01,209: INFO/MainProcess] Task tasks.inpainting_task.process_complex_inpainting_request[16237508-2c0d-4e62-bcfd-2db6454887f9] received
+[2025-11-22 16:53:01,216: WARNING/ForkPoolWorker-62] --- DIAGNOSTIC ---: Sync Client (Celery) is configured to use Azure Storage Account: 'isfunsaimgtreatmentprod'
+[2025-11-22 16:53:01,221: INFO/ForkPoolWorker-62] Request URL: 'https://isfunsaimgtreatmentprod.blob.core.windows.net/modification-inputs-json/16237508-2c0d-4e62-bcfd-2db6454887f9_input.json'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '590'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.25.1 Python/3.11.14 (Linux-5.15.0-88-generic-x86_64-with-glibc2.35)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'b4ac05a8-c7c3-11f0-9dbb-0cc47aa399b4'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+[2025-11-22 16:53:01,410: INFO/ForkPoolWorker-62] Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Sat, 22 Nov 2025 16:53:01 GMT'
+    'ETag': '"0x8DE29E798F8ED2C"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '170e54ea-b01e-0078-14d0-5bc64f000000'
+    'x-ms-client-request-id': 'b4ac05a8-c7c3-11f0-9dbb-0cc47aa399b4'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Sat, 22 Nov 2025 16:53:00 GMT'
+[2025-11-22 16:53:01,411: WARNING/ForkPoolWorker-62] Downloading images for task 16237508-2c0d-4e62-bcfd-2db6454887f9 (Flux)...
+[2025-11-22 16:53:01,490: INFO/ForkPoolWorker-62] HTTP Request: GET https://raw.githubusercontent.com/rayehe-hosseinipour/TestImages/main/unitTestImages/coast.jpg "HTTP/1.1 200 OK"
+[2025-11-22 16:53:01,588: INFO/ForkPoolWorker-62] HTTP Request: GET https://raw.githubusercontent.com/rayehe-hosseinipour/TestImages/main/unitTestImages/coast-dogB-m.png "HTTP/1.1 200 OK"
+[2025-11-22 16:53:01,699: WARNING/ForkPoolWorker-62] AI_CLIENT: Calling Flux Inpainting service for prompt 'orange cat'
+[2025-11-22 16:53:12,895: INFO/ForkPoolWorker-62] HTTP Request: POST http://localhost:8001/inpaint "HTTP/1.1 200 OK"
+[2025-11-22 16:53:12,898: WARNING/ForkPoolWorker-62] Image saved locally to: /home/administrator/development/isAIInpaintingServices/main_app/local_image_storage/jokvo4dk_16237508-2c0d-4e62-bcfd-2db6454887f9_123_orange_cat_inpainted.png
+[2025-11-22 16:53:12,899: INFO/ForkPoolWorker-62] Request URL: 'https://isfunsaimgtreatmentprod.blob.core.windows.net/modification-outputs-json/16237508-2c0d-4e62-bcfd-2db6454887f9_output.json'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '1097'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.25.1 Python/3.11.14 (Linux-5.15.0-88-generic-x86_64-with-glibc2.35)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'bba209c0-c7c3-11f0-9dbb-0cc47aa399b4'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+[2025-11-22 16:53:12,945: INFO/ForkPoolWorker-62] Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Sat, 22 Nov 2025 16:53:12 GMT'
+    'ETag': '"0x8DE29E79FD98832"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '170e5d9f-b01e-0078-77d0-5bc64f000000'
+    'x-ms-client-request-id': 'bba209c0-c7c3-11f0-9dbb-0cc47aa399b4'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Sat, 22 Nov 2025 16:53:11 GMT'
+[2025-11-22 16:53:12,949: INFO/ForkPoolWorker-62] Task tasks.inpainting_task.process_complex_inpainting_request[16237508-2c0d-4e62-bcfd-2db6454887f9] succeeded in 11.733730384148657s: {'success': True, 'output': {'parentID': 'in_painting_template', 'elapsedSeconds': 11.68, 'steps': [{...}, {...}, {...}], 'results': [{...}]}}
+[2025-11-22 16:54:59,664: INFO/MainProcess] Task tasks.inpainting_task.process_complex_inpainting_request[c4cfcca8-acd4-4588-a000-4464ab11da13] received
+[2025-11-22 16:54:59,668: INFO/ForkPoolWorker-62] Request URL: 'https://isfunsaimgtreatmentprod.blob.core.windows.net/modification-inputs-json/c4cfcca8-acd4-4588-a000-4464ab11da13_input.json'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '591'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.25.1 Python/3.11.14 (Linux-5.15.0-88-generic-x86_64-with-glibc2.35)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': 'fb459d6c-c7c3-11f0-9dbb-0cc47aa399b4'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+[2025-11-22 16:54:59,715: INFO/ForkPoolWorker-62] Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Sat, 22 Nov 2025 16:54:59 GMT'
+    'ETag': '"0x8DE29E7DF7D7834"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '170ed174-b01e-0078-72d0-5bc64f000000'
+    'x-ms-client-request-id': 'fb459d6c-c7c3-11f0-9dbb-0cc47aa399b4'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Sat, 22 Nov 2025 16:54:59 GMT'
+[2025-11-22 16:54:59,716: WARNING/ForkPoolWorker-62] Downloading images for task c4cfcca8-acd4-4588-a000-4464ab11da13 (Flux)...
+[2025-11-22 16:54:59,786: INFO/ForkPoolWorker-62] HTTP Request: GET https://raw.githubusercontent.com/rayehe-hosseinipour/TestImages/main/unitTestImages/coast.jpg "HTTP/1.1 200 OK"
+[2025-11-22 16:54:59,868: INFO/ForkPoolWorker-62] HTTP Request: GET https://raw.githubusercontent.com/rayehe-hosseinipour/TestImages/main/unitTestImages/coast-dogB-m.png "HTTP/1.1 200 OK"
+[2025-11-22 16:54:59,978: WARNING/ForkPoolWorker-62] AI_CLIENT: Calling Flux Inpainting service for prompt 'orange cat'
+[2025-11-22 16:55:10,594: INFO/ForkPoolWorker-62] HTTP Request: POST http://localhost:8001/inpaint "HTTP/1.1 200 OK"
+[2025-11-22 16:55:10,596: WARNING/ForkPoolWorker-62] Image saved locally to: /home/administrator/development/isAIInpaintingServices/main_app/local_image_storage/3m9xynub_c4cfcca8-acd4-4588-a000-4464ab11da13_123_orange_cat_inpainted.png
+[2025-11-22 16:55:10,598: INFO/ForkPoolWorker-62] Request URL: 'https://isfunsaimgtreatmentprod.blob.core.windows.net/modification-outputs-json/c4cfcca8-acd4-4588-a000-4464ab11da13_output.json'
+Request method: 'PUT'
+Request headers:
+    'Content-Length': '1099'
+    'x-ms-blob-type': 'REDACTED'
+    'x-ms-version': 'REDACTED'
+    'Content-Type': 'application/octet-stream'
+    'Accept': 'application/xml'
+    'User-Agent': 'azsdk-python-storage-blob/12.25.1 Python/3.11.14 (Linux-5.15.0-88-generic-x86_64-with-glibc2.35)'
+    'x-ms-date': 'REDACTED'
+    'x-ms-client-request-id': '01c97668-c7c4-11f0-9dbb-0cc47aa399b4'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+[2025-11-22 16:55:10,644: INFO/ForkPoolWorker-62] Response status: 201
+Response headers:
+    'Content-Length': '0'
+    'Content-MD5': 'REDACTED'
+    'Last-Modified': 'Sat, 22 Nov 2025 16:55:10 GMT'
+    'ETag': '"0x8DE29E7E601193A"'
+    'Server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0'
+    'x-ms-request-id': '170edd62-b01e-0078-73d0-5bc64f000000'
+    'x-ms-client-request-id': '01c97668-c7c4-11f0-9dbb-0cc47aa399b4'
+    'x-ms-version': 'REDACTED'
+    'x-ms-content-crc64': 'REDACTED'
+    'x-ms-request-server-encrypted': 'REDACTED'
+    'Date': 'Sat, 22 Nov 2025 16:55:10 GMT'
+[2025-11-22 16:55:10,646: INFO/ForkPoolWorker-62] Task tasks.inpainting_task.process_complex_inpainting_request[c4cfcca8-acd4-4588-a000-4464ab11da13] succeeded in 10.980292784050107s: {'success': True, 'output': {'parentID': 'in_painting_template', 'elapsedSeconds': 10.93, 'steps': [{...}, {...}, {...}], 'results': [{...}]}}
+
+worker: Hitting Ctrl+C again will initiate cold shutdown, terminating all running tasks!
+
+worker: Warm shutdown (MainProcess)

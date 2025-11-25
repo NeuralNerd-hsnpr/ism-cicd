@@ -1,0 +1,54 @@
+INFO:     Will watch for changes in these directories: ['/home/administrator/development/isAIInpaintingServices/flux-fill-service']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [3904139] using WatchFiles
+/home/administrator/miniconda3/envs/inpaint/lib/python3.11/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO:     Started server process [3904164]
+INFO:     Waiting for application startup.
+[2025-11-22 16:50:00.119] [info] Initializing QuantizedFluxModel on device 0
+[2025-11-22 16:50:00.338] [info] Loading weights from /home/administrator/.cache/huggingface/hub/models--mit-han-lab--svdq-int4-flux.1-fill-dev/snapshots/e331143be73c40573ae227a4fac14105a3dfd6c7/transformer_blocks.safetensors
+[2025-11-22 16:50:04.657] [info] Done.
+INFO:     Triggering model loading...
+MODEL_MANAGER: Loading environment variables and logging into Hugging Face...
+MODEL_MANAGER: Loading Nunchaku Flux Transformer...
+Injecting quantized module
+MODEL_MANAGER: Loading FLUX-Fill pipeline...
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]You set `add_prefix_space`. The tokenizer needs to be converted from the slow tokenizers
+Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:00,  6.12it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][ALoading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 36.73it/s]
+Loading pipeline components...:  86%|████████▌ | 6/7 [00:00<00:00, 12.58it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  8.73it/s]
+INFO:     Application startup complete.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+MODEL_MANAGER: FLUX-Fill model loaded and moved to cuda.
+INFO:     172.167.1.30:60628 - "GET / HTTP/1.1" 404 Not Found
+INFO:     172.167.1.30:60628 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     172.167.1.30:60670 - "GET /docs HTTP/1.1" 200 OK
+INFO:     172.167.1.30:60670 - "GET /openapi.json HTTP/1.1" 200 OK
+ENDPOINT: Loading base and mask images from uploaded bytes...
+ENDPOINT: Running inference with optional params: {}
+MODEL_MANAGER: Running inference with seed 2624115143...
+  0%|          | 0/25 [00:00<?, ?it/s]  4%|▍         | 1/25 [00:00<00:10,  2.30it/s]  8%|▊         | 2/25 [00:00<00:09,  2.46it/s] 12%|█▏        | 3/25 [00:01<00:08,  2.49it/s] 16%|█▌        | 4/25 [00:01<00:08,  2.52it/s] 20%|██        | 5/25 [00:01<00:07,  2.53it/s] 24%|██▍       | 6/25 [00:02<00:07,  2.54it/s] 28%|██▊       | 7/25 [00:02<00:07,  2.55it/s] 32%|███▏      | 8/25 [00:03<00:06,  2.55it/s] 36%|███▌      | 9/25 [00:03<00:06,  2.55it/s] 40%|████      | 10/25 [00:03<00:05,  2.55it/s] 44%|████▍     | 11/25 [00:04<00:05,  2.55it/s] 48%|████▊     | 12/25 [00:04<00:05,  2.55it/s] 52%|█████▏    | 13/25 [00:05<00:04,  2.55it/s] 56%|█████▌    | 14/25 [00:05<00:04,  2.55it/s] 60%|██████    | 15/25 [00:05<00:03,  2.55it/s] 64%|██████▍   | 16/25 [00:06<00:03,  2.55it/s] 68%|██████▊   | 17/25 [00:06<00:03,  2.55it/s] 72%|███████▏  | 18/25 [00:07<00:02,  2.55it/s] 76%|███████▌  | 19/25 [00:07<00:02,  2.55it/s] 80%|████████  | 20/25 [00:07<00:01,  2.55it/s] 84%|████████▍ | 21/25 [00:08<00:01,  2.55it/s] 88%|████████▊ | 22/25 [00:08<00:01,  2.54it/s] 92%|█████████▏| 23/25 [00:09<00:00,  2.54it/s] 96%|█████████▌| 24/25 [00:09<00:00,  2.54it/s]100%|██████████| 25/25 [00:09<00:00,  2.54it/s]100%|██████████| 25/25 [00:09<00:00,  2.54it/s]
+MODEL_MANAGER: Inference complete.
+INFO:     127.0.0.1:37018 - "POST /inpaint HTTP/1.1" 200 OK
+ENDPOINT: Loading base and mask images from uploaded bytes...
+ENDPOINT: Running inference with optional params: {}
+MODEL_MANAGER: Running inference with seed 1946164479...
+  0%|          | 0/25 [00:00<?, ?it/s]  4%|▍         | 1/25 [00:00<00:09,  2.56it/s]  8%|▊         | 2/25 [00:00<00:08,  2.56it/s] 12%|█▏        | 3/25 [00:01<00:08,  2.55it/s] 16%|█▌        | 4/25 [00:01<00:08,  2.55it/s] 20%|██        | 5/25 [00:01<00:07,  2.55it/s] 24%|██▍       | 6/25 [00:02<00:07,  2.55it/s] 28%|██▊       | 7/25 [00:02<00:07,  2.55it/s] 32%|███▏      | 8/25 [00:03<00:06,  2.55it/s] 36%|███▌      | 9/25 [00:03<00:06,  2.55it/s] 40%|████      | 10/25 [00:03<00:05,  2.55it/s] 44%|████▍     | 11/25 [00:04<00:05,  2.55it/s] 48%|████▊     | 12/25 [00:04<00:05,  2.54it/s] 52%|█████▏    | 13/25 [00:05<00:04,  2.54it/s] 56%|█████▌    | 14/25 [00:05<00:04,  2.55it/s] 60%|██████    | 15/25 [00:05<00:03,  2.54it/s] 64%|██████▍   | 16/25 [00:06<00:03,  2.54it/s] 68%|██████▊   | 17/25 [00:06<00:03,  2.54it/s] 72%|███████▏  | 18/25 [00:07<00:02,  2.54it/s] 76%|███████▌  | 19/25 [00:07<00:02,  2.54it/s] 80%|████████  | 20/25 [00:07<00:01,  2.54it/s] 84%|████████▍ | 21/25 [00:08<00:01,  2.54it/s] 88%|████████▊ | 22/25 [00:08<00:01,  2.54it/s] 92%|█████████▏| 23/25 [00:09<00:00,  2.54it/s] 96%|█████████▌| 24/25 [00:09<00:00,  2.54it/s]100%|██████████| 25/25 [00:09<00:00,  2.54it/s]100%|██████████| 25/25 [00:09<00:00,  2.54it/s]
+MODEL_MANAGER: Inference complete.
+INFO:     127.0.0.1:58374 - "POST /inpaint HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     217.119.139.47:53108 - "GET / HTTP/1.1" 404 Not Found
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3904164]
+INFO:     Stopping reloader process [3904139]
+/home/administrator/miniconda3/envs/inpaint/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

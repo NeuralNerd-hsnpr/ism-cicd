@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+celery
+redis
+httpx
+python-dotenv # This is already here from flux-fill, but good to ensure it's in main-app too
+azure-storage-blob

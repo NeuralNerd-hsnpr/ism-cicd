@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Core AI libraries
+torch
+torchvision
+torchaudio
+
+# Diffusers and its dependencies
+diffusers
+transformers
+accelerate
+safetensors

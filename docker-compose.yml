@@ -1,0 +1,202 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - ai-network
+    restart: always
+
+  main-app:
+    build: ./main-app
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - INFERENCE_SERVICE_URL=http://flux-service:8001/inpaint
+      - LAMA_SERVICE_URL=http://lama-service:8002/remove
+      - RMBG_SERVICE_URL=http://rmbg-service:8003/remove_background
+      - GAZE_SERVICE_URL=http://gaze-service:8004/get_direction_by_mask
+      - PIX2PIX_SERVICE_URL=http://pix2pix-service:8005/style
+      - SDXL_INPAINTING_SERVICE_URL=http://sdxl-service:8006/inpaint
+      - WAN_SERVICE_URL=http://wan-service:8007/generate_video
+      # Add other env vars as needed, or use env_file
+    env_file:
+      - ./main-app/.env
+    depends_on:
+      - redis
+      - flux-service
+      - lama-service
+      - rmbg-service
+      - gaze-service
+      - pix2pix-service
+      - sdxl-service
+      - wan-service
+    networks:
+      - ai-network
+    volumes:
+      - ./main-app/local_image_storage:/app/local_image_storage
+
+  celery-worker-inpainting:
+    build: ./main-app
+    command: celery -A tasks.celery_app worker -Q inpainting_sync,inpainting_async,treatment_sync,treatment_async --loglevel=info
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      # Service URLs must be reachable
+      - INFERENCE_SERVICE_URL=http://flux-service:8001/inpaint
+      - LAMA_SERVICE_URL=http://lama-service:8002/remove
+      - RMBG_SERVICE_URL=http://rmbg-service:8003/remove_background
+      - GAZE_SERVICE_URL=http://gaze-service:8004/get_direction_by_mask
+      - PIX2PIX_SERVICE_URL=http://pix2pix-service:8005/style
+      - SDXL_INPAINTING_SERVICE_URL=http://sdxl-service:8006/inpaint
+      - WAN_SERVICE_URL=http://wan-service:8007/generate_video
+    env_file:
+      - ./main-app/.env
+    depends_on:
+      - redis
+    networks:
+      - ai-network
+    volumes:
+      - ./main-app/local_image_storage:/app/local_image_storage
+
+  celery-worker-background:
+    build: ./main-app
+    command: celery -A tasks.celery_app worker -Q background_sync,background_async --loglevel=info
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - RMBG_SERVICE_URL=http://rmbg-service:8003/remove_background
+    env_file:
+      - ./main-app/.env
+    depends_on:
+      - redis
+    networks:
+      - ai-network
+    volumes:
+      - ./main-app/local_image_storage:/app/local_image_storage
+
+  celery-worker-video:
+    build: ./main-app
+    command: celery -A tasks.celery_app worker -Q video_async --loglevel=info
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - WAN_SERVICE_URL=http://wan-service:8007/generate_video
+    env_file:
+      - ./main-app/.env
+    depends_on:
+      - redis
+    networks:
+      - ai-network
+    volumes:
+      - ./main-app/local_image_storage:/app/local_image_storage
+
+  flux-service:
+    build: ./flux-fill-service
+    # ports: - "8001:8001" # Removed for scaling
+    networks:
+      - ai-network
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  lama-service:
+    build: ./lama-service
+    # ports: - "8002:8002" # Removed for scaling
+    networks:
+      - ai-network
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  rmbg-service:
+    build: ./rmbg-service
+    # ports: - "8003:8003" # Removed for scaling
+    networks:
+      - ai-network
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  gaze-service:
+    build: ./gaze-service
+    # ports: - "8004:8004" # Removed for scaling
+    networks:
+      - ai-network
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  pix2pix-service:
+    build: ./stable-diffusion-pix2pix-service
+    # ports: - "8005:8005" # Removed for scaling
+    networks:
+      - ai-network
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  sdxl-service:
+    build: ./sdxl-inpainting-service
+    # ports: - "8006:8006" # Removed for scaling
+    networks:
+      - ai-network
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  wan-service:
+    build: ./wan-service
+    # ports: - "8007:8007" # Removed for scaling
+    networks:
+      - ai-network
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      - ./models/wan-AI:/app/models/wan-AI
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+networks:
+  ai-network:
+    driver: bridge

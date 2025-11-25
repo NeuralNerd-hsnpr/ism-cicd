@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+torch
+diffsynth-studio
+transformers
+accelerate
+pillow
+python-multipart

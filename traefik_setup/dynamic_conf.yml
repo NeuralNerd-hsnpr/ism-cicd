@@ -1,0 +1,17 @@
+http:
+  routers:
+    my-api-router:
+      # --- THIS IS THE CRITICAL CHANGE ---
+      # We are telling Traefik to match ALL requests that come to its entrypoint.
+      rule: "PathPrefix(`/`)"
+      service: my-api-service
+      entryPoints:
+        - api # This should still point to your 'api' entrypoint on port 8004
+
+  services:
+    my-api-service:
+      loadBalancer:
+        servers:
+          # These remain the same, pointing to your APIs
+          - url: "http://172.17.0.1:8002"
+          - url: "http://172.17.0.1:8003"

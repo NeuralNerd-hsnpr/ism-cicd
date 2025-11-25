@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Core AI libraries
+torch
+torchvision
+torchaudio
+
+# The model's main dependency and its requirements
+l2cs-core
+numpy
+opencv-python-headless
+Pillow
