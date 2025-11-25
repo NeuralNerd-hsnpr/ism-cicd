@@ -124,3 +124,4 @@ watchdog==4.0.2
 zipp==3.22.0
 python-multipart==0.0.20
 celery==5.5.3
+redis==7.1.0
