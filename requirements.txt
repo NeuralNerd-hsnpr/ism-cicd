@@ -123,3 +123,4 @@ uvicorn==0.34.2
 watchdog==4.0.2
 zipp==3.22.0
 python-multipart==0.0.20
+celery==5.5.3

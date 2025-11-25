@@ -20,7 +20,7 @@ echo "Root Directory: $ROOT_DIR"
 mkdir -p "$ROOT_DIR/logs"
 echo "Logs will be written to $ROOT_DIR/logs/"
 
-# 0. Start Redis
+# 0. Start Red
 echo "Starting Redis..."
 if command -v redis-server &> /dev/null; then
     redis-server > logs/redis.log 2>&1 &

@@ -52,7 +52,8 @@ jobs:
             --gpus all \
             --restart always \
             -v ~/.cache/huggingface:/root/.cache/huggingface \
-            -v $(pwd)/logs:/app/logs \
+            -v /home/administrator/development/ism-cicd/logs:/app/logs \
+            -v /home/administrator/development/ism-cicd/.env:/app/.env \
             unified-ai-service:$SHORT_SHA
 
           # Prune unused images to save space

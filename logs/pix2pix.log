@@ -1,28 +1,0 @@
-INFO:     Will watch for changes in these directories: ['/home/administrator/development/isAIInpaintingServices/stable-diffusion-pix2pix-service']
-INFO:     Uvicorn running on http://0.0.0.0:8005 (Press CTRL+C to quit)
-INFO:     Started reloader process [3904146] using WatchFiles
-/home/administrator/miniconda3/envs/inpaint/lib/python3.11/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
-  import pynvml  # type: ignore[import]
-INFO:     Started server process [3904163]
-INFO:     Waiting for application startup.
-INFO:     Loading Stable Diffusion models...
-INFO:     Loading InstructPix2Pix pipeline...
-Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]Loading pipeline components...:  17%|█▋        | 1/6 [00:00<00:01,  2.62it/s]Loading pipeline components...:  50%|█████     | 3/6 [00:00<00:00,  6.68it/s]Loading pipeline components...: 100%|██████████| 6/6 [00:00<00:00, 10.67it/s]Loading pipeline components...: 100%|██████████| 6/6 [00:00<00:00,  8.64it/s]
-INFO:     InstructPix2Pix loaded successfully.
-INFO:     Loading ControlNet InstructPix2Pix pipeline...
-Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  14%|█▍        | 1/7 [00:00<00:03,  1.82it/s]Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:02,  2.37it/s]Loading pipeline components...:  57%|█████▋    | 4/7 [00:01<00:00,  5.02it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:01<00:00,  9.00it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:01<00:00,  6.08it/s]
-INFO:     Application startup complete.
-WARNING:  Invalid HTTP request received.
-WARNING:  Invalid HTTP request received.
-WARNING:  Invalid HTTP request received.
-WARNING:  Invalid HTTP request received.
-INFO:     ControlNet loaded successfully.
-INFO:     172.167.1.30:43834 - "GET /docs HTTP/1.1" 200 OK
-INFO:     172.167.1.30:43834 - "GET /openapi.json HTTP/1.1" 200 OK
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [3904163]
-INFO:     Stopping reloader process [3904146]
-/home/administrator/miniconda3/envs/inpaint/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
-  warnings.warn('resource_tracker: There appear to be %d '
