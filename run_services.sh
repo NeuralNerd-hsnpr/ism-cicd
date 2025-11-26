@@ -35,10 +35,10 @@ else
         echo "Starting new Redis container..."
         docker run -d --name redis -p 6379:6379 redis:alpine
     fi
-fi
+fi 
 
 # 1. Start Flux Service (Port 8001)
-echo "Starting Flux Service (8001)..."
+echo "Starting Flux Service (8001)..." 
 (cd "$ROOT_DIR/flux-fill-service" && uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload) > "$ROOT_DIR/logs/flux.log" 2>&1 &
 
 # 2. Start Lama Service (Port 8002)
